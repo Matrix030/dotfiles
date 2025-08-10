@@ -62,6 +62,7 @@ sudo pacman -S fontconfig
 mkdir -p ~/.config/fontconfig/conf.d
 nvim ~/.config/fontconfig/conf.d/99-default-font.conf
 ## put this inside:
+```
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
@@ -89,6 +90,7 @@ nvim ~/.config/fontconfig/conf.d/99-default-font.conf
     </edit>
   </match>
 </fontconfig>
+```
 
 
 ### refersh:
