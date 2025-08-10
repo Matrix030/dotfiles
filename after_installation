@@ -10,3 +10,31 @@ makepkg -si
 #zen-browser
 yay -S zen-browser-bin
 
+#Volume Control
+sudo pacman -S pavucontrol
+
+#waybar
+sudo pacman -S waybar
+
+##this is a write command do not copy paste this
+nvim ~/.config/hypr/hyprland.conf
+
+###add this in the hyprland.conf file
+exec-once = waybar
+
+# make your config
+mkdir -p ~/.config/waybar
+cp /etc/xdg/waybar/config ~/.config/waybar/
+cp /etc/xdg/waybar/style.css ~/.config/waybar/
+
+#Edit these
+nvim ~/.config/waybar/config.jsonc
+nvim ~/.config/waybar/style.css
+
+# USE ONLY ONCE
+hyprctl dispatch exec waybar
+
+#add fonts
+sudo pacman -S ttf-cascadia-code-nerd
+fc-list | grep -i caskaydia
+fc-cache -fv
