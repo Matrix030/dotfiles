@@ -1,3 +1,15 @@
+#install nvim
+sudo pacman -S neovim
+
+#install zsh
+sudo pacman -S zsh
+
+#install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+##change shell if you accidentally pressed no which installation:
+chsh -s $(which zsh)
+
 #for bluetooth
 sudo pacman -S blueman bluez bluez-utils
 
@@ -38,3 +50,7 @@ hyprctl dispatch exec waybar
 sudo pacman -S ttf-cascadia-code-nerd
 fc-list | grep -i caskaydia
 fc-cache -fv
+
+
+#install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
