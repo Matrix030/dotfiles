@@ -10,6 +10,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ##change shell if you accidentally pressed no which installation:
 chsh -s $(which zsh)
 
+uncomment the shell comment in the kitty.conf file here
 #for bluetooth
 sudo pacman -S blueman bluez bluez-utils
 
