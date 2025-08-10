@@ -4,6 +4,9 @@ sudo pacman -S neovim
 # clipboard
 sudo pacman -S wl-clipboard 
 
+# install rofi(follow this guide):
+https://github.com/newmanls/rofi-themes-collection/tree/master
+
 
 # install zsh
 sudo pacman -S zsh
