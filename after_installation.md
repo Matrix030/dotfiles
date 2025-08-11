@@ -5,6 +5,7 @@ sudo pacman -S neovim
 sudo pacman -S wl-clipboard 
 
 # install rofi(follow this guide):
+sudo pacman -S rofi
 https://github.com/newmanls/rofi-themes-collection/tree/master
 
 
@@ -116,3 +117,7 @@ ssh-add ~/.ssh/id_ed25519
 copy the text from the pub file and paste it in the github ssh page
 ssh -T git@github.com
 git config --global url."git@github.com:".insteadOf https://github.com/
+
+# vscode installation:
+yay -S visual-studio-code-bin
+
