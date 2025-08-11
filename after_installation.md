@@ -118,6 +118,9 @@ copy the text from the pub file and paste it in the github ssh page
 ssh -T git@github.com
 git config --global url."git@github.com:".insteadOf https://github.com/
 
+
+# install hyprpaper:
+sudo -S hyprpaper
 # vscode installation:
 yay -S visual-studio-code-bin
 
