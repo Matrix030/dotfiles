@@ -49,8 +49,7 @@ button {
 #network,
 #cpu,
 #memory,
-#custom-lock,
-#custom-power,
+
 #custom-weather,
 #custom-uptime,
 #custom-docker {
@@ -72,6 +71,10 @@ button {
 
 #battery {
   color: #a6d189;
+}
+
+#memory {
+  border-radius: 0px 5px 5px 0px;
 }
 
 #battery.charging {
@@ -105,15 +108,7 @@ button {
   border-radius: 5px;
 }
 
-#custom-lock {
-  color: #babbf1;
-}
 
-#custom-power {
-  margin-right: 1rem;
-  border-radius: 0px 5px 5px 0px;
-  color: #e78284;
-}
 
 #custom-docker.docker {
   color: #85c1dc;
