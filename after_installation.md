@@ -44,6 +44,23 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 chsh -s $(which zsh)
 ```
 
+# install fzf
+```
+yay -S fzf
+```
+## setup fzf keybindings and fuzzy completions for zsh in .zshrc
+```
+source <(zf --zsh)
+```
+## install bat (for fzf)
+```
+sudo pacman -S bat
+```
+
+### bat preview of fzf and jump to nvim shortcut (add in .zshrc)
+```
+alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
+```
 ### uncomment the shell comment in the kitty.conf file after completing the above steps
 
 # Bluetooth Utils Installation
