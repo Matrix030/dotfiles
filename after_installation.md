@@ -161,6 +161,11 @@ fc-cache -fv
 sudo -S hyprpaper
 ```
 
+# install obsidian
+```
+yay -S obsidian
+```
+
 # vscode installation (incase you break the shell config file):
 ```
 yay -S visual-studio-code-bin
