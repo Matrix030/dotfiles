@@ -32,7 +32,7 @@ sudo pacman -S rofi
 # install zsh
 ```
 sudo pacman -S zsh
-```
+```sudo pacman -Syu
 
 # install oh-my-zsh
 ```
@@ -173,7 +173,7 @@ yay -S visual-studio-code-bin
 
 # rsync
 ```
-yay -S rsync
+sudo pacman -S rsync
 ```
 
 # lsd
