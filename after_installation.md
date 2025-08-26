@@ -37,7 +37,7 @@ sudo pacman -S zsh
 # install oh-my-zsh
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+```sudo pacman -S lsd
 
 ## change shell if you accidentally pressed no which installation:
 ```
@@ -174,4 +174,9 @@ yay -S visual-studio-code-bin
 # rsync
 ```
 yay -S rsync
+```
+
+# lsd
+```
+sudo pacman -S lsd
 ```
