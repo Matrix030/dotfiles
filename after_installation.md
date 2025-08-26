@@ -170,3 +170,8 @@ yay -S obsidian
 ```
 yay -S visual-studio-code-bin
 ```
+
+# rsync
+```
+yay -S rsync
+```
