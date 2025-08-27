@@ -6,9 +6,19 @@ cd yay
 makepkg -si
 ```
 
+# man pages
+```
+sudo pacman -S man-db man-pages less
+```
+
 # zen-browser
 ```
 yay -S zen-browser-bin
+```
+
+# ghostty
+```
+yay -S ghostty
 ```
 
 # install nvm (required for nvim lsp)
@@ -180,4 +190,11 @@ sudo pacman -S rsync
 # lsd
 ```
 sudo pacman -S lsd
+```
+
+# power-management (cpu-power)
+```
+yay -S auto-cpufreq
+sudo systemctl enable --now auto-cpufreq
+auto-cpufreq --monitor  # works on desktops only for some reason
 ```
