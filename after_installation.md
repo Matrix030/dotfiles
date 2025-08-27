@@ -32,12 +32,12 @@ sudo pacman -S rofi
 # install zsh
 ```
 sudo pacman -S zsh
-```sudo pacman -Syu
-
+sudo pacman -Syu
+```
 # install oh-my-zsh
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```sudo pacman -S lsd
+```
 
 ## change shell if you accidentally pressed no which installation:
 ```
