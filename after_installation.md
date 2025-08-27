@@ -14,6 +14,7 @@ yay -S zen-browser-bin
 # install nvm (required for nvim lsp)
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+nvm install node
 ```
 
 # install nvim
@@ -24,7 +25,7 @@ sudo pacman -S neovim
 ```
 sudo pacman -S wl-clipboard 
 ```
-# install rofi(follow this !(guide)[https://github.com/newmanls/rofi-themes-collection/tree/master]):
+# Install rofi (follow this [guide](https://github.com/newmanls/rofi-themes-collection/tree/master)):
 ```
 sudo pacman -S rofi
 ```
