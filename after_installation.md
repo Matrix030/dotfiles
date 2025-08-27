@@ -158,7 +158,7 @@ fc-cache -fv
 
 # install hyprpaper:
 ```
-sudo -S hyprpaper
+yay -S hyprpaper
 ```
 
 # install obsidian
