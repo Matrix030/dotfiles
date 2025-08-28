@@ -15,12 +15,12 @@
   ],
 
   "hyprland/workspaces": {
-    "format": "{name}: {icon}",
-    "format-icons": {
-      "active": "",
-      "default": ""
-    }
-  },
+  "format": "{name}: {icon}",
+  "format-icons": { "active": "", "default": "" },
+
+  "show-special": true,              // <— show special workspaces
+  "special-visible-only": true       // <— only when toggled/visible (optional)
+	},
 
   "tray": {
     "icon-size": 16,

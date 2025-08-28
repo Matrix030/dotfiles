@@ -198,3 +198,8 @@ yay -S auto-cpufreq
 sudo systemctl enable --now auto-cpufreq
 auto-cpufreq --monitor  # works on desktops only for some reason
 ```
+
+# zoxide
+```
+sudo pacman -S zoxide
+```
