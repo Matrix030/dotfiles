@@ -35,6 +35,12 @@ sudo pacman -S neovim
 ```
 sudo pacman -S wl-clipboard 
 ```
+
+# unzip - required for nvim
+```
+sudo pacman -S unzip
+```
+
 # Install rofi (follow this [guide](https://github.com/newmanls/rofi-themes-collection/tree/master)):
 ```
 sudo pacman -S rofi
