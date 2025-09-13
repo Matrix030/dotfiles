@@ -46,11 +46,11 @@
 
 background = #000000
 font-family = CaskaydiaCove Nerd Font Mono
-font-size = 12
+font-size = 15
 
 
 # Opacity (needs a compositor like hyprland’s built-in one)
-background-opacity = 0.75
+background-opacity = 0.6
 
 # Default shell (uncomment if you want zsh)
 # shell = /usr/bin/zsh
