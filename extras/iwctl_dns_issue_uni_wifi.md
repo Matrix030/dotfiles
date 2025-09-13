@@ -51,4 +51,99 @@
 
 That’s the full fix cycle. Next time you hit this problem, just follow **steps 1–4**, then verify.
 
-Do you want me to write this out as a **tiny script** (`fix-dns.sh`) you can run whenever DNS breaks?
+
+
+Here’s the step-by-step:
+
+---
+
+## 1. Install and enable `iwd`
+
+```bash
+sudo pacman -S iwd
+sudo systemctl enable --now iwd
+```
+
+---
+
+## 2. Start the interactive shell
+
+```bash
+iwctl
+```
+
+Inside `iwctl`, check your device:
+
+```bash
+device list
+```
+
+Say it’s `wlan0`.
+
+---
+
+## 3. Scan for networks
+
+```bash
+station wlan0 scan
+station wlan0 get-networks
+```
+
+Find your university SSID (e.g. `eduroam`).
+
+---
+
+## 4. Create a config file for 802.1X
+
+Enterprise Wi-Fi requires an `iwd` **network profile**. These live in `/var/lib/iwd/`.
+
+Create a file:
+
+```bash
+sudo nvim /var/lib/iwd/eduroam.8021x
+```
+
+Put this in (adjust `EAP-Method`, `Phase2-Method`, and your identity):
+
+```ini
+[Security]
+EAP-Method=PEAP
+EAP-Identity=your_netid@university.edu
+EAP-PEAP-Phase2-Method=MSCHAPV2
+Passphrase=yourpassword
+```
+
+Some universities use TTLS/PAP instead:
+
+```ini
+[Security]
+EAP-Method=TTLS
+EAP-Identity=your_netid@university.edu
+EAP-TTLS-Phase2-Method=PAP
+Passphrase=yourpassword
+```
+
+If your school requires a CA certificate, add:
+
+```ini
+EAP-PEAP-CACert=/etc/ssl/certs/your_university_ca.pem
+```
+
+---
+
+## 5. Connect
+
+Back in `iwctl`:
+
+```bash
+station wlan0 connect eduroam
+```
+
+If the profile is written correctly, `iwd` will use it and authenticate.
+
+---
+
+✅ After this, `iwd` will auto-connect to that SSID in the future.
+
+---
+
