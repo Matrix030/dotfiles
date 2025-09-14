@@ -209,3 +209,44 @@ auto-cpufreq --monitor  # works on desktops only for some reason
 ```
 sudo pacman -S zoxide
 ```
+
+# swaync
+```
+yay -S swaync
+```
+
+## After installation 
+```
+mkdir -p ~/.config/swaync
+```
+
+## Start swaync with Hyprland
+```
+nvim ~/.config/hypr/hyprland.conf
+```
+```
+exec-once = swaync
+```
+
+# Chrome
+```
+yay -S google-chrome
+```
+
+# ripgrep
+```
+sudo pacman -S ripgrep
+```
+
+# libreOffice
+```
+sudo pacman -S libreoffice-fresh
+```
+
+# gammastep (bluelight Filter)
+```
+sudo pacman -S gammastep
+
+gammastep -O 3500 //warm
+gammastep -x      //Back to Normal
+```
