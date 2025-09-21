@@ -41,3 +41,13 @@ If that returns nothing, your system is missing the CJK fonts, which explains wh
 
 Do you want me to also show you how to **prioritize Cascadia Cove NF in terminal but still keep fallbacks system-wide** (so you don’t get ugly mixed fonts)?
 
+
+# Calibri etc
+```
+yay -S ttf-ms-fonts
+yay -S ttf-vista-fontsc
+```
+
+```
+fc-cache -fv
+```
