@@ -208,6 +208,7 @@ auto-cpufreq --monitor  # works on desktops only for some reason
 # zoxide
 ```
 sudo pacman -S zoxide
+eval "$(zoxide init zsh)"  # add this in .zshrc
 ```
 
 # swaync
