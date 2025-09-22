@@ -147,3 +147,9 @@ If the profile is written correctly, `iwd` will use it and authenticate.
 
 ---
 
+# the above only happens when networkmanager, iwd and wpa_supplicant are enables at same time
+disable them using the following
+```
+sudo systemctl disable --now NetworkManager wpa_supplicant connman dhcpcd netctl
+```
+and then use the iwctl (clean arch install) steps, **don't forget** to restart the iwctl service
