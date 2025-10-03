@@ -1,0 +1,31 @@
+# Wofi configuration file
+# Save this as ~/.config/wofi/config
+
+# Window dimensions and positioning
+width=400
+height=300
+location=center
+show=drun
+prompt=Search...
+
+# Behavior settings
+allow_markup=true
+allow_images=true
+image_size=32
+gtk_dark=true
+insensitive=true
+hide_scroll=true
+
+# Performance and matching
+matching=fuzzy
+exec_search=false
+hide_search=false
+parse_search=false
+
+# Multi-monitor support
+normal_window=false
+layer=overlay
+
+# Key bindings (optional)
+key_expand=Tab
+key_exit=Escape

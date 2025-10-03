@@ -1,0 +1,126 @@
+/* Wofi Style - Matching SwayNC/Waybar Theme */
+
+* {
+    font-family: "CaskaydiaCove Nerd Font Mono";
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* Main window */
+window {
+    background-color: rgba(16, 16, 16, 0.95);
+    border: 2px solid rgba(137, 180, 250, 0.6);
+    border-radius: 12px;
+    margin: 5px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Input field */
+#input {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: #c6d0f5;
+    border: 1px solid rgba(116, 199, 236, 0.4);
+    border-radius: 8px;
+    margin: 8px;
+    padding: 8px 12px;
+    font-size: 15px;
+}
+
+#input:focus {
+    border-color: rgba(140, 170, 238, 0.8);
+    box-shadow: 0 0 8px rgba(140, 170, 238, 0.3);
+}
+
+/* Outer box containing the scroll area */
+#outer-box {
+    background: transparent;
+    margin: 5px;
+}
+
+/* Inner box - the scrollable area */
+#inner-box {
+    background: transparent;
+    margin: 0;
+}
+
+/* Scroll area */
+#scroll {
+    background: transparent;
+}
+
+/* Text entries */
+#text {
+    color: #c6d0f5;
+    margin: 4px;
+    padding: 4px;
+}
+
+/* Individual entry items */
+#entry {
+    background: transparent;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 2px;
+    transition: all 0.2s ease;
+}
+
+#entry:hover,
+#entry:selected {
+    background-color: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(140, 170, 238, 0.4);
+}
+
+#entry:focus,
+#entry:active {
+    background-color: rgba(49, 50, 68, 0.8);
+    border: 1px solid rgba(140, 170, 238, 0.7);
+    box-shadow: 0 2px 8px rgba(140, 170, 238, 0.2);
+}
+
+/* Application icons */
+#img {
+    margin-right: 8px;
+    border-radius: 4px;
+}
+
+/* No results text */
+#text:disabled {
+    color: rgba(115, 121, 148, 0.8);
+}
+
+/* Scrollbar styling */
+scrolledwindow scrollbar {
+    background: transparent;
+    width: 6px;
+}
+
+scrolledwindow scrollbar slider {
+    background-color: rgba(140, 170, 238, 0.6);
+    border-radius: 3px;
+    min-height: 20px;
+}
+
+scrolledwindow scrollbar slider:hover {
+    background-color: rgba(153, 209, 219, 0.8);
+}
+
+/* Make sure the scrollbar track is invisible */
+scrolledwindow scrollbar trough {
+    background: transparent;
+}
+
+/* Entry text styling for different states */
+#entry #text {
+    color: #c6d0f5;
+}
+
+#entry:hover #text,
+#entry:selected #text {
+    color: #c6d0f5;
+}
+
+#entry:focus #text,
+#entry:active #text {
+    color: #c6d0f5;
+    font-weight: 500;
+}
