@@ -1,2 +1,119 @@
+configuration {
+    modi: "drun";
+    show-icons: true;
+    display-drun: "Search...";
+    drun-display-format: "{name}";
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: false;
+    matching: "fuzzy";
+    terminal: "ghostty";
+}
 
-@theme "/home/rgmatr1x/.local/share/rofi/themes/rounded-nord-dark.rasi"
+* {
+    font: "CaskaydiaCove Nerd Font Mono 13";
+    background-color: transparent;
+    text-color: #c6d0f5;
+}
+
+ entry {
+    background-color: transparent;
+    text-color: #c6d0f5ff;
+    placeholder: "Search...";
+    placeholder-color: #737594ff;
+}
+
+inputbar {
+    background-color: #1e1e1eff;
+    text-color: #c6d0f5ff;  /* Add this */
+    border: 1px;
+    border-color: #74c7ecff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    children: [ prompt, entry ];
+}
+
+window {
+    background-color: #101010ff;
+    border: 2px;
+    border-color: #89b4faff;
+    border-radius: 12px;
+    width: 400px;
+    padding: 5px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+    spacing: 8px;
+}
+
+inputbar {
+    background-color: #1e1e1eff;
+    border: 1px;
+    border-color: #74c7ecff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    enabled: false;
+}
+
+entry {
+    background-color: transparent;
+    placeholder: "Search...";
+    placeholder-color: #737594ff;
+}
+
+listview {
+    background-color: transparent;
+    lines: 8;
+    columns: 1;
+    spacing: 2px;
+    cycle: false;
+    dynamic: true;
+    scrollbar: true;
+}
+
+scrollbar {
+    width: 6px;
+    handle-width: 6px;
+    handle-color: #8caaeeff;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+element {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 8px 12px;
+    spacing: 8px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: #c6d0f5ff;
+}
+
+element selected.normal {
+    background-color: #313244ff;
+    border: 1px;
+    border-color: #8caaeeff;
+    text-color: #c6d0f5ff;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: #c6d0f5ff;
+}
+
+element-icon {
+    size: 32px;
+    border-radius: 4px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
