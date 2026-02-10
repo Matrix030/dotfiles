@@ -110,7 +110,7 @@ Put this in (adjust `EAP-Method`, `Phase2-Method`, and your identity):
 EAP-Method=PEAP
 EAP-Identity=your_netid@university.edu
 EAP-PEAP-Phase2-Method=MSCHAPV2
-Passphrase=yourpassword
+EAP-Password=yourpassword
 ```
 
 Some universities use TTLS/PAP instead:
