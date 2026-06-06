@@ -47,12 +47,7 @@
 background = #000000
 font-family = CaskaydiaCove Nerd Font Mono
 font-size = 15
-
-
-# Opacity (needs a compositor like hyprland’s built-in one)
-background-opacity = 0.4
-
-# Default shell (uncomment if you want zsh)
-# shell = /usr/bin/zsh
+theme = Catppuccin Frappe
+background-opacity = 0.90
 
 keybind = shift+enter=text:\x1b\r

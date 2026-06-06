@@ -3,19 +3,19 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
 
+  //"modules-center": ["clock", "custom/graduation", "custom/weather"],
   "modules-center": ["clock", "custom/weather"],
-
   "modules-right": [
     "pulseaudio",
-    "custom/uptime",
     "network",
+    "custom/gpu",
     "cpu",
     "memory",
     "tray",
   ],
 
   "hyprland/workspaces": {
-  "format": "{name}: {icon}",
+  "format": "{name}: <span size='130%'>{icon}</span>",
   "format-icons": { "active": "", "default": "" },
 
   "show-special": true,              // <— show special workspaces
@@ -28,40 +28,42 @@
   },
 
 
-  "clock": {
+   "clock": {
     "timezone": "America/New_York_City",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%A | %d - %H:%M:%S}",
-    "interval": 1
-  },
+     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+     "format": "{:%A | %d - %H:%M:%S}",
+     "interval": 1
+   },
+
 
   "network": {
-    "format-wifi": "󰤢 {bandwidthDownBits}",
-    "format-ethernet": "󰈀 {bandwidthDownBits}",
-    "format-disconnected": "󰤠 No Network",
+    "format-wifi": "<span size='130%'>󰤢</span> {bandwidthDownBits}",
+    "format-ethernet": "<span size='130%'>󰈀</span> {bandwidthDownBits}",
+    "format-disconnected": "<span size='130%'>󰤠</span> No Network",
     "interval": 5,
     "tooltip": false
   },
 
   "cpu": {
     "interval": 1,
-    "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+    "format": "<span size='130%'>  </span>{icon0}{icon1}{icon2}{icon3} {usage:>2}%",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
   },
 
   "memory": {
     "interval": 5,
-    "format": "  {used:0.1f}G/{total:0.1f}G"
+    "format": "<span size='130%'>  </span>{used:0.1f}G/{total:0.1f}G"
   },
 
-  "custom/uptime": {
-    "format": "{}",
-    "interval": 300,
-    "exec": "sh -c '(uptime -p)'"
+  "custom/gpu": {
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/gpu.sh",
+    "interval": 2,
+    "tooltip": true
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume}%",
+    "format": "<span size='130%'>{icon}</span> {volume}%",
     "format-muted": "",
     "format-icons": {
       "default": ["", "", " "]
