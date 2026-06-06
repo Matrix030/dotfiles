@@ -1,88 +1,90 @@
-## 📝 Fixing “DNS lookup failed on ::1:53” in Arch (quick run-down)
+# University Wi-Fi: DNS Fix + eduroam (802.1X) with iwd
 
-1. **Enable systemd-resolved** (DNS service in systemd):
+This note covers two related problems on Arch:
 
-   ```bash
-   sudo systemctl enable --now systemd-resolved
-   ```
-
-2. **Point `/etc/resolv.conf` to resolved’s stub file** (so apps use it):
-
-   ```bash
-   sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-   ```
-
-3. **Find your Wi-Fi interface name** (usually `wlan0`, `wlp2s0`, etc.):
-
-   ```bash
-   ip link show
-   ```
-
-4. **Set working DNS servers on that interface**:
-
-   ```bash
-   sudo resolvectl dns <iface> 1.1.1.1 8.8.8.8
-   sudo resolvectl domain <iface> "~."
-   sudo resolvectl flush-caches
-   ```
-
-5. **Verify DNS is working**:
-
-   ```bash
-   resolvectl status
-   cat /etc/resolv.conf
-   getent hosts proxy.golang.org
-   ```
-
-6. **Retry your Go command**:
-
-   ```bash
-   go install github.com/spf13/cobra/cobra@latest
-   ```
-
-### Why this works
-
-* Before, `/etc/resolv.conf` was an **empty file from NetworkManager**, but NM wasn’t running → so no DNS.
-* By enabling `systemd-resolved` and symlinking `/etc/resolv.conf`, DNS requests go through resolved.
-* By explicitly setting DNS servers (Cloudflare + Google), you bypass campus/local misconfigs.
-
-
-
-
-That’s the full fix cycle. Next time you hit this problem, just follow **steps 1–4**, then verify.
-
-
-
-Here’s the step-by-step:
+1. Fixing `DNS lookup failed on ::1:53` (DNS not resolving).
+2. Connecting to enterprise Wi-Fi (e.g. eduroam) that requires 802.1X.
 
 ---
 
-## 1. Install and enable `iwd`
+## Part 1 — Fix "DNS lookup failed on ::1:53"
+
+### 1. Enable systemd-resolved
+
+```bash
+sudo systemctl enable --now systemd-resolved
+```
+
+### 2. Point /etc/resolv.conf at resolved's stub
+
+```bash
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+```
+
+### 3. Find your Wi-Fi interface
+
+```bash
+ip link show
+```
+
+Usually `wlan0`, `wlp2s0`, etc.
+
+### 4. Set working DNS servers on that interface
+
+```bash
+sudo resolvectl dns <iface> 1.1.1.1 8.8.8.8
+sudo resolvectl domain <iface> "~."
+sudo resolvectl flush-caches
+```
+
+### 5. Verify
+
+```bash
+resolvectl status
+cat /etc/resolv.conf
+getent hosts proxy.golang.org
+```
+
+### 6. Retry whatever failed
+
+```bash
+go install github.com/spf13/cobra/cobra@latest
+```
+
+### Why this works
+
+- The old `/etc/resolv.conf` was an empty file left by NetworkManager, but NM wasn't running — so there was no DNS.
+- Enabling `systemd-resolved` and symlinking `/etc/resolv.conf` routes DNS through resolved.
+- Setting explicit DNS servers (Cloudflare + Google) bypasses broken campus/local DNS.
+
+> Next time, run steps 1–4 then verify.
+
+---
+
+## Part 2 — Connect to eduroam (802.1X) with iwd
+
+### 1. Install and enable iwd
 
 ```bash
 sudo pacman -S iwd
 sudo systemctl enable --now iwd
 ```
 
----
-
-## 2. Start the interactive shell
+### 2. Start the interactive shell and find your device
 
 ```bash
 iwctl
 ```
 
-Inside `iwctl`, check your device:
+Inside `iwctl`:
 
 ```bash
 device list
 ```
 
-Say it’s `wlan0`.
+Assume it's `wlan0`.
 
----
-
-## 3. Scan for networks
+### 3. Scan for networks
 
 ```bash
 station wlan0 scan
@@ -91,19 +93,15 @@ station wlan0 get-networks
 
 Find your university SSID (e.g. `eduroam`).
 
----
+### 4. Create an 802.1X profile
 
-## 4. Create a config file for 802.1X
-
-Enterprise Wi-Fi requires an `iwd` **network profile**. These live in `/var/lib/iwd/`.
-
-Create a file:
+Enterprise Wi-Fi needs an iwd network profile in `/var/lib/iwd/`:
 
 ```bash
 sudo nvim /var/lib/iwd/eduroam.8021x
 ```
 
-Put this in (adjust `EAP-Method`, `Phase2-Method`, and your identity):
+Most universities (PEAP/MSCHAPv2):
 
 ```ini
 [Security]
@@ -113,7 +111,7 @@ EAP-PEAP-Phase2-Method=MSCHAPV2
 EAP-Password=yourpassword
 ```
 
-Some universities use TTLS/PAP instead:
+Some use TTLS/PAP instead:
 
 ```ini
 [Security]
@@ -129,9 +127,7 @@ If your school requires a CA certificate, add:
 EAP-PEAP-CACert=/etc/ssl/certs/your_university_ca.pem
 ```
 
----
-
-## 5. Connect
+### 5. Connect
 
 Back in `iwctl`:
 
@@ -139,17 +135,16 @@ Back in `iwctl`:
 station wlan0 connect eduroam
 ```
 
-If the profile is written correctly, `iwd` will use it and authenticate.
+If the profile is correct, iwd authenticates and will auto-connect to this SSID in the future.
 
 ---
 
-✅ After this, `iwd` will auto-connect to that SSID in the future.
+## Note: conflicting network services
 
----
+The eduroam steps only fail when NetworkManager, iwd, and wpa_supplicant are all enabled at the same time. Disable the others first:
 
-# the above only happens when networkmanager, iwd and wpa_supplicant are enables at same time
-disable them using the following
-```
+```bash
 sudo systemctl disable --now NetworkManager wpa_supplicant connman dhcpcd netctl
 ```
-and then use the iwctl (clean arch install) steps, **don't forget** to restart the iwctl service
+
+Then follow the steps in **iwctl (clean arch install)** — and don't forget to restart the iwd service.

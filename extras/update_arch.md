@@ -1,80 +1,54 @@
-## ✅ Arch Linux Update Guide
+# Arch Linux Update Guide
 
-### 1. Sync and update official packages
+## 1. Check Arch news first
+
+Open [archlinux.org/news](https://archlinux.org/news/) before updating to see if there are **manual intervention** steps (e.g. big `openssl`, `glibc`, or `python` bumps). This is the number one way to avoid breakage.
+
+## 2. Sync and update official packages
 
 ```bash
 sudo pacman -Syu
 ```
 
-- Updates package database and upgrades all system packages.
-    
-- If you see `linux` or `systemd` updated → reboot after finishing.
-    
+Updates the package database and upgrades all system packages. If `linux` or `systemd` are updated, reboot after finishing.
 
----
+## 3. Update AUR packages
 
-### 2. Update AUR packages (since you use `yay`)
+Since you use `yay`:
 
 ```bash
 yay -Syu
 ```
 
-- Updates both repo + AUR packages.
-- Use this after pacman update to keep everything in sync.
+This updates both repo and AUR packages, keeping everything in sync.
 
----
-### 3. Check Arch news before updating
-
-Open [archlinux.org/news](https://archlinux.org/news/) to see if there are **manual steps** (e.g., big `openssl`, `glibc`, or `python` bumps).
-
-- This is the #1 way to avoid breakage.
-
----
-
-### 4. Clean up old/orphaned packages
+## 4. Clean up orphaned packages
 
 ```bash
 sudo pacman -Qtdq | sudo pacman -Rns -
 ```
 
-- Removes unused dependencies to keep system tidy.
+Removes unused dependencies. If there are no orphans, pacman simply reports nothing to do.
 
----
+## 5. (Optional) Snapshot before updating
 
-### 5. (Optional but safe) — Take a snapshot before updating
+If you use Btrfs or want rollback capability:
 
-If you use **Btrfs** or want rollback:
+```bash
+yay -S timeshift
+```
 
-- Install Timeshift:
-    
-    ```bash
-    yay -S timeshift
-    ```
-    
-- Create a snapshot before updating.
-    
+Then create a snapshot before each update.
 
----
+## How often?
 
-## 🔄 How often?
+- Update at least once a week (daily is fine).
+- Don't wait months — large jumps are riskier.
 
-- Update **at least once a week** (daily is fine too).
-    
-- Don’t wait months — large jumps are more risky.
-    
-
----
-
-## 🛡 Summary
+## Summary
 
 1. Check [Arch news](https://archlinux.org/news/)
-    
 2. `sudo pacman -Syu`
-    
 3. `yay -Syu`
-    
-4. Reboot if kernel/systemd updated
-    
-5. Clean or snapshot (optional)
-    
-
+4. Reboot if the kernel or systemd was updated
+5. Clean orphans or snapshot (optional)

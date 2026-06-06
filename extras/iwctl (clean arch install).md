@@ -1,20 +1,17 @@
-### 1. Install iwd
+# Wi-Fi with iwd / iwctl (Clean Arch Install)
+
+Connect to Wi-Fi on a fresh Arch system using `iwd` and its client `iwctl`.
+
+## 1. Install iwd
 
 ```bash
 sudo pacman -S iwd
 ```
 
-### 2. Enable and start the service
-
-Enable it so it starts at boot:
+## 2. Enable and start the service
 
 ```bash
 sudo systemctl enable iwd.service
-```
-
-Start it immediately:
-
-```bash
 sudo systemctl start iwd.service
 ```
 
@@ -24,85 +21,72 @@ Check its status:
 systemctl status iwd.service
 ```
 
-### 3. Using `iwctl` (iwd client)
+## 3. Connect with iwctl
 
-Run the interactive client:
+Open the interactive client:
 
 ```bash
 iwctl
 ```
 
-Inside the prompt you can:
-
-- **List devices:**
-    
-    ```bash
-    device list
-    ```
-    
-- **Scan for networks:**
-    
-    ```bash
-    station wlan0 scan
-    station wlan0 get-networks
-    ```
-    
-- **Connect to a network:**
-    
-    ```bash
-    station wlan0 connect "SSID"
-    ```
-    
-
-Exit with:
+Inside the prompt:
 
 ```bash
+# List wireless devices (e.g. wlan0)
+device list
+
+# Scan and list networks
+station wlan0 scan
+station wlan0 get-networks
+
+# Connect (you'll be prompted for the password)
+station wlan0 connect "SSID"
+
+# Leave the client
 exit
 ```
 
+## 4. Networking backend (choose one)
 
+### Option 1 — NetworkManager with iwd as backend (recommended)
 
-#### Option 1: Use NetworkManager with iwd as the backend (recommended if you want GUI tools or easy management)
+Best if you want GUI tools (`nm-applet`) or `nmcli`.
 
 Edit `/etc/NetworkManager/NetworkManager.conf`:
-```
+
+```ini
 [device]
 wifi.backend=iwd
 ```
 
 Restart NetworkManager:
-```
+
+```bash
 sudo systemctl restart NetworkManager
 ```
-Now, NetworkManager will use `iwd` instead of `wpa_supplicant` for Wi-Fi, and you can keep using `nmcli` or a GUI like `nm-applet`.
 
-#### **Option 2: Let iwd handle both Wi-Fi and networking** (standalone mode)
+NetworkManager now uses `iwd` instead of `wpa_supplicant` for Wi-Fi.
 
-Edit (or create) the config:
-```
-sudo nano /etc/iwd/main.conf
-```
+### Option 2 — iwd standalone (handles Wi-Fi + networking itself)
 
-Add:
-```
+Edit (or create) `/etc/iwd/main.conf`:
+
+```ini
 [Network]
 EnableIPv6=true
 ```
 
 Restart iwd:
-```
+
+```bash
 sudo systemctl restart iwd
 ```
 
+## 5. Connected but no ping (DNS not working)
 
-### if connected but no ping
-Edit the config:
-```
-sudo nvim /etc/iwd/main.conf
-```
+Let iwd configure the network and DNS itself. Edit `/etc/iwd/main.conf`:
 
-Add:
-```
+```ini
 [General]
 EnableNetworkConfiguration=true
 
@@ -110,21 +94,23 @@ EnableNetworkConfiguration=true
 NameResolvingService=systemd
 ```
 
-Restart services:
-```
+Restart the services:
+
+```bash
 sudo systemctl restart iwd
 sudo systemctl restart systemd-resolved
 ```
 
+Reconnect:
 
-Reconnect your Wi-Fi:
-```
+```bash
 iwctl
 station wlan0 disconnect
 station wlan0 connect "SSID"
 ```
 
-Now when you run:
-```
+Verify:
+
+```bash
 station wlan0 show
 ```

@@ -1,15 +1,25 @@
-Step 1: Test raw connectivity
-```
+# DNS Broken After Connecting (Quick Fix)
+
+You're connected to Wi-Fi but names won't resolve.
+
+## 1. Test raw connectivity
+
+```bash
 ping 8.8.8.8
 ```
-- If this works → internet is fine, only DNS is broken.
-- If it doesn’t → gateway or routing issue.
 
-Permanent Fix
-Enable `systemd-resolved` so DNS is always managed:
-```
+- Works → internet is fine, only DNS is broken (continue below).
+- Fails → it's a gateway or routing issue, not DNS.
+
+## 2. Permanent fix
+
+Enable `systemd-resolved` so DNS is always managed, and point `/etc/resolv.conf` at its stub:
+
+```bash
 sudo systemctl enable --now systemd-resolved
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 ```
 
-That will survive reboots and keep DNS stable.
+This survives reboots and keeps DNS stable.
+
+> For the full DNS + university Wi-Fi walkthrough, see `iwctl_dns_issue_uni_wifi.md`.

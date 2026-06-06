@@ -1,53 +1,51 @@
-###  What you should do
+# Fallback Fonts (CJK, Emoji, Math, MS Fonts)
 
-Keep your Nerd Font for coding, but also install **fallback fonts** for everything else:
+Keep your Nerd Font for coding, but install fallback fonts so non-Latin text, emoji, and math symbols render everywhere instead of showing as tofu (□).
+
+## 1. Install Noto fallback fonts
 
 ```bash
 sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 ```
 
-Optional but useful:
+Optional extras:
 
 ```bash
 yay -S ttf-ms-fonts ttf-unifont
 ```
 
-Then rebuild font cache:
+## 2. Rebuild the font cache
 
 ```bash
 fc-cache -fv
 ```
 
----
+## How fallback works
 
-### ⚙️ Make sure font fallback works
+Apps (browsers, terminals) automatically pick a fallback font when the active font lacks a character:
 
-Browsers like Zen/Firefox will automatically pick fallback fonts if the current font doesn’t support a character. With the above installed:
+- Code → your Nerd Font
+- Chinese / Japanese / Korean → `Noto Sans CJK`
+- Emoji → `Noto Color Emoji`
+- Math symbols, arrows → `Noto Sans Extra`
 
-- Code → will use your Nerd Font
-- Chinese/Japanese/Korean → will fall back to `Noto Sans CJK`
-- Emojis → will fall back to `Noto Color Emoji`
-- Math symbols, arrows → from `Noto Extra`
-
-### 🔍 Next step
-
-Can you check for me:
+## Verify CJK is installed
 
 ```bash
 fc-list | grep "Noto Sans CJK"
 ```
 
-If that returns nothing, your system is missing the CJK fonts, which explains why Chinese isn’t rendering in your browser.
+If this returns nothing, the CJK fonts are missing — install `noto-fonts-cjk` (step 1) and rebuild the cache.
 
-Do you want me to also show you how to **prioritize Cascadia Cove NF in terminal but still keep fallbacks system-wide** (so you don’t get ugly mixed fonts)?
+## Microsoft fonts (Calibri, etc.)
 
-
-# Calibri etc
-```
+```bash
 yay -S ttf-ms-fonts
-yay -S ttf-vista-fontsc
+yay -S ttf-vista-fonts
 ```
 
-```
+Then rebuild the cache:
+
+```bash
 fc-cache -fv
 ```

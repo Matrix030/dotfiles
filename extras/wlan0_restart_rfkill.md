@@ -1,51 +1,52 @@
+# Wi-Fi Blocked by rfkill
 
-1. Check the RF-kill status:
-   ```bash
-   rfkill list
-   ```
+If `wlan0` won't come up, it may be soft- or hard-blocked by rfkill.
 
-   You’ll see something like:
+## 1. Check the rfkill status
 
-   ```
-   0: phy0: Wireless LAN
-       Soft blocked: yes
-       Hard blocked: no
-   ```
+```bash
+rfkill list
+```
 
-   * **Soft blocked: yes** → disabled in software.
-   * **Hard blocked: yes** → disabled by hardware switch (a key on your laptop, or a BIOS setting).
+Example output:
 
-2. If it’s soft-blocked, unblock it:
+```
+0: phy0: Wireless LAN
+    Soft blocked: yes
+    Hard blocked: no
+```
 
-   ```bash
-   sudo rfkill unblock all
-   ```
+- **Soft blocked: yes** → disabled in software (fixable with `rfkill`).
+- **Hard blocked: yes** → disabled by hardware (a laptop switch or BIOS setting).
 
-   or just Wi-Fi:
+## 2. If soft-blocked, unblock it
 
-   ```bash
-   sudo rfkill unblock wifi
-   ```
+```bash
+sudo rfkill unblock all
+```
 
-3. If it’s hard-blocked:
+Or just Wi-Fi:
 
-   * Check if your laptop has a physical **Wi-Fi switch** or **function key** (Fn + F2/F3, airplane mode, etc.).
-   * Make sure Wi-Fi is enabled in the BIOS/UEFI settings.
+```bash
+sudo rfkill unblock wifi
+```
 
-4. Once unblocked, bring it back up:
+## 3. If hard-blocked
 
-   ```bash
-   sudo ip link set wlan0 up
-   ```
+- Check for a physical Wi-Fi switch or function key (Fn + F2/F3, airplane mode, etc.).
+- Make sure Wi-Fi is enabled in the BIOS/UEFI settings.
 
-5. Then retry with `iwctl`:
+## 4. Bring the interface up
 
-   ```bash
-   iwctl
-   device list
-   ```
+```bash
+sudo ip link set wlan0 up
+```
 
-⚡ In short: unblock with `rfkill`, then re-enable.
+## 5. Retry with iwctl
 
-Do you want me to also show you how to make sure `rfkill` unblocks automatically at boot so you don’t need to run it manually every time?
+```bash
+iwctl
+device list
+```
 
+In short: unblock with `rfkill`, then re-enable the interface.
