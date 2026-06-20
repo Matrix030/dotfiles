@@ -1,0 +1,22 @@
+[pyprland]
+plugins = ["stash"]
+
+[stash.S]
+    animation = ""
+    size = "24% 54%"
+    position = "76% 22%"
+    preserve_aspect = true
+
+[stash.C]
+    animation = ""
+    size = "24% 54%"
+    position = "76% 22%"
+    preserve_aspect = true
+
+[stash.U]
+    animation = ""
+    size = "24% 54%"
+    position = "76% 22%"
+    preserve_aspect = true
+
+
